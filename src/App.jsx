@@ -1,19 +1,20 @@
-import ButtonGradient from "./assets/svg/ButtonGradient";
-import Benefits from "./components/Benefits";
-import Collaboration from "./components/Collaboration";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Pricing from "./components/Pricing";
-import Roadmap from "./components/Roadmap";
-import Services from "./components/Services";
-import VideoCarousel from "./components/VideoCarousel";
+import React, { Suspense, lazy } from 'react';
 
+const Header = lazy(() => import('./components/Header'));
+const Hero = lazy(() => import('./components/Hero'));
+const Benefits = lazy(() => import('./components/Benefits'));
+const Collaboration = lazy(() => import('./components/Collaboration'));
+const Services = lazy(() => import('./components/Services'));
+const Pricing = lazy(() => import('./components/Pricing'));
+const Roadmap = lazy(() => import('./components/Roadmap'));
+const Footer = lazy(() => import('./components/Footer'));
+const ButtonGradient = lazy(() => import('./assets/svg/ButtonGradient'));
 
 const App = () => {
   return (
     <>
       <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
+        <Suspense fallback={<div>Loading...</div>}>
           <Header />
           <Hero />
           <Benefits />
@@ -22,11 +23,12 @@ const App = () => {
           <Pricing />
           <Roadmap />
           <Footer />
-          {/* <VideoCarousel /> */}
-
+        </Suspense>
       </div>
 
-      <ButtonGradient />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ButtonGradient />
+      </Suspense>
     </>
   );
 };
